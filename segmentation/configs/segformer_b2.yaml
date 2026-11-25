@@ -1,0 +1,35 @@
+# Whole-image PlantSeg fine-tuning. This is a documented starting recipe, not a published-score reproduction.
+model:
+  hub_id: nvidia/segformer-b2-finetuned-ade-512-512
+  pretrained_dir: weights/segformer_b2_ade20k
+data:
+  prepared: data/prepared
+  image_size: 512
+  workers: 4
+  augment: true
+  degrade_scales:
+  - 1
+  verify_content: true
+train:
+  device: cuda
+  seed: 42
+  batch_size: 8
+  accumulate: 1
+  epochs: 30
+  steps: null
+  lr_encoder: 6.0e-05
+  lr_decoder: 0.0006
+  weight_decay: 0.01
+  warmup: 100
+  grad_clip: 1.0
+  amp: true
+  trainable: all
+  disease_dice_weight: 0.0
+  save_every: 250
+  validate_every: 0
+  val_limit: 0
+  log_every: 10
+  patience: 5
+  selection_metric: miou_foreground
+  preview_count: 25
+  save_val_predictions: true
