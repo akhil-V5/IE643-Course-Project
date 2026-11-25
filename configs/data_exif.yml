@@ -1,1 +1,8 @@
+prepared: data/prepared
+preview_count: 12
+allow_binary_labels: false
+allow_cross_split_duplicates: true
+source:
+  mode: csv
+  manifest: /home/ubuntu/DL2/PlantSeg_Experiment_Suite_v3/data/plantseg_exif_manifest.csv
 
