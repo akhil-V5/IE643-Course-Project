@@ -1,0 +1,6 @@
+# Pillow bicubic interpolation. Same uint8 LR input as ResShift in controlled evaluations.
+inference:
+  method: bicubic
+  scale: 4
+  seed: 42
+  preview_count: 12

@@ -1,0 +1,12 @@
+# Install torch and torchvision separately; see README. Deliberately no xformers.
+numpy==1.26.4
+Pillow==10.4.0
+omegaconf==2.3.0
+einops==0.7.0
+timm==0.9.16
+loralib==0.1.2
+scipy==1.11.4
+scikit-image==0.22.0
+tqdm==4.66.5
+PyYAML==6.0.2
+pytest==8.3.3

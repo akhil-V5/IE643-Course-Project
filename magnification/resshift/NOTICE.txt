@@ -1,0 +1,14 @@
+PlantSeg Disease-Weighted ResShift Training Package
+
+Independently authored integration code and documentation for a research course
+project. Not an official PlantSeg or ResShift release. No model weights, dataset
+images, third-party repository source, or font files are redistributed here.
+The bootstrap downloads official ResShift resources separately. Their licenses
+remain applicable; read external/ResShift/LICENSE before use or redistribution.
+PlantSeg source images may have individual licenses.
+
+No warranty of model accuracy, disease diagnosis, or compatibility with all
+hardware/software combinations. Tests and untested components are documented
+in docs/TEST_REPORT.md. The model has not been trained on the user's dataset in
+this environment. The proposed lesion-weighted objective requires experimental
+validation, including false-symptom and lesion-erasure tests.

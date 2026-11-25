@@ -1,0 +1,48 @@
+# FUTURE training phase, separate from SegFormer. Uses the SAME shared source manifest.
+# HR256/LR64 paired patches; smaller sources are padded, not excluded or enlarged.
+# Native diffusion loss + 0.1 * lesion-weighted RGB L1 (lesion weight5).
+# Validation here is deterministic PATCH monitoring, NOT the final whole-image comparison.
+# Padded RGB contributes to native latent loss; padded areas excluded from auxiliary lesion loss.
+# Run common whole-image evaluation after training; both checkpoints frozen there.
+backend:
+  repo: external/ResShift
+  config: external/ResShift/configs/realsr_swinunet_realesrgan256.yaml
+  diffusion_weights: weights/resshift_realsrx4_s15_v1.pth
+  autoencoder_weights: weights/autoencoder_vq_f4.pth
+  lock_file: external/resshift_lock.json
+inference:
+  sampling_mode: tiled  # One 64x64 LR tile on GPU at a time.
+  tile_lr: 64
+  overlap: 16
+  method: resshift
+  scale: 4
+  seed: 42
+  device: cuda
+  amp: true
+  preview_count: 12
+data:
+  prepared: data/prepared
+  hr_size: 256
+  scale: 4
+  degradation: bicubic
+  workers: 0
+  augment: true
+train:
+  seed: 42
+  batch_size: 1
+  accumulate: 4
+  steps: 10000
+  lr: 1.0e-05
+  warmup: 100
+  weight_decay: 0.0
+  grad_clip: 1.0
+  amp: true
+  decoder_checkpoint: true
+  aux_weight: 0.1
+  lesion_multiplier: 5.0
+  save_every: 500
+  validate_every: 500
+  val_limit: 0
+  log_every: 10
+  preview_count: 12
+  trainable: all

@@ -1,0 +1,18 @@
+# Frozen official v1 RealSR x4, 15 diffusion steps. 64x64 LR tiles; no global image resize and no segmentation gate.
+# Pretraining degradation differs from pure bicubic: this is deliberately an off-the-shelf baseline.
+backend:
+  repo: external/ResShift
+  config: external/ResShift/configs/realsr_swinunet_realesrgan256.yaml
+  diffusion_weights: weights/resshift_realsrx4_s15_v1.pth
+  autoencoder_weights: weights/autoencoder_vq_f4.pth
+  lock_file: external/resshift_lock.json
+inference:
+  sampling_mode: tiled  # One 64x64 LR tile on GPU at a time.
+  tile_lr: 64
+  overlap: 16
+  method: resshift
+  scale: 4
+  seed: 42
+  device: cuda
+  amp: true
+  preview_count: 12
